@@ -28,7 +28,7 @@ task :update_feed => :environment do
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
       ["いい朝だね！",
-       "今日もよく眠れた？",
+       "昨日はよく眠れた？",
        "昨日はお疲れ様だったね！",
        "早起きしてえらいね！",
        "いつもより起きるのちょっと遅いんじゃない？"].sample
@@ -37,7 +37,7 @@ task :update_feed => :environment do
        "良い一日を過ごしてね!(* ˃ ᵕ ˂ )b",
        "雨に負けずに今日も頑張ってね!٩(ˊᗜˋ*)و",
        "今日も一日楽しんでいこうね!( ,,>ω•́ )۶",
-       "楽しいことがありますように(*´▽`*)❀"].sample
+       "今日も一日楽しいことがありますように(*´▽`*)❀"].sample
 
     mid_per = 50
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
