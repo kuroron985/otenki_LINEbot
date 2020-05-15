@@ -26,6 +26,7 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[2]/'
 
+          # 明日・明後日雨が降るかどうかの降水確率の下限値
           min_per = 30
           case input
 
