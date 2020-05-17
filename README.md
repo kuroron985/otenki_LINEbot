@@ -43,5 +43,5 @@
 * 友達追加の人数上限が50名のため、50名を超えた場合、友達追加できない可能性がございます。
 
 ## 作成者
-* kuroron
+* kuro
 * Twitter：https://twitter.com/Kuro38869980
