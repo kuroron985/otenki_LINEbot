@@ -42,9 +42,9 @@ task :update_feed => :environment do
 
     mid_per = 50
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
-      word3 = "今日は雨が降りそうだから傘を忘れないでね！"
+      word3 = "今日は雨が降りそうだから傘を忘れないでね！( ๑>ω•́ )ﻭ✧"
     else
-      word3 = "今日は雨が降るかもしれないから折りたたみ傘があると安心だよ！"
+      word3 = "今日は雨が降るかもしれないから折りたたみ傘があると安心だよ！( ๑>ω•́ )ﻭ✧"
     end
 
     # 発信するメッセージの設定
