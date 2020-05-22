@@ -19,6 +19,13 @@ task :update_feed => :environment do
 # area[2」＝「愛知県西部」
   xpath = 'weatherforecast/pref/area[2]/info/rainfallchance/'
 
+# 天気
+  weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
+
+# 気温
+  max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
+  min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
+
 # 降水確率
   per06to12 = doc.elements[xpath + 'period[2]'].text
   per12to18 = doc.elements[xpath + 'period[3]'].text
@@ -49,7 +56,7 @@ task :update_feed => :environment do
 
     # 発信するメッセージの設定
     push =
-      "#{word1}\n#{word3}\n降水確率はこんな感じだよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
+      "#{word1}\n#{word3}\n今日の天気はこんな感じだよ!\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\n降水確率はこんな感じだよ!\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
 
     user_ids = User.all.pluck(:line_id)
     message = {
