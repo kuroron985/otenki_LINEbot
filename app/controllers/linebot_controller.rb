@@ -31,26 +31,38 @@ class LinebotController < ApplicationController
           case input
 
           when /.*(明日|あした).*/
+            #  明日の天気・気温
+            weather = doc.elements[xpath + '/info[2]/weather'].text # 天気（例：「晴れ」）
+            max = doc.elements[xpath + '/info[2]/temperature/range[1]'].text # 最高気温
+            min = doc.elements[xpath + '/info[2]/temperature/range[2]'].text # 最低気温
+            
+            # 明日の降水確率
             per06to12 = doc.elements[xpath + 'info[2]/rainfallchance/period[2]'].text
             per12to18 = doc.elements[xpath + 'info[2]/rainfallchance/period[3]'].text
             per18to24 = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push =
-                "明日の天気だよね。\n明日は雨が降りそうだよ(>_<)\n今のところ降水確率はこんな感じだよ！\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
+              "明日の天気と気温はこんな感じだよ!\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\n降水確率はこんな感じだよ٩(ˊᗜˋ*)و \n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
             else
               push =
-                "明日の天気？\n明日は雨が降らない予定だよ(≧∇≦*)/\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
+                "明日の天気？\n明日は雨が降らない予定だよ(≧∇≦*)/\n明日の天気と気温はこんな感じだよ!\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
             end
           when /.*(明後日|あさって).*/
+            # 明後日の天気・気温
+            weather = doc.elements[xpath + '/info[3]/weather'].text # 天気（例：「晴れ」）
+            max = doc.elements[xpath + '/info[3]/temperature/range[1]'].text # 最高気温
+            min = doc.elements[xpath + '/info[3]/temperature/range[2]'].text # 最低気温
+
+            # 明後日の降水確率
             per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]l'].text
             per12to18 = doc.elements[xpath + 'info[3]/rainfallchance/period[3]l'].text
             per18to24 = doc.elements[xpath + 'info[3]/rainfallchance/period[4]l'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push =
-                "明後日の天気だよね。\n何かあるのかな？\n明後日は雨が降りそう…\n当日の朝に雨が降りそうだったら教えるね！"
+              "明後日の天気と気温はこんな感じだよ!\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\n降水確率はこんな感じだよ٩(ˊᗜˋ*)و \n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\nまた当日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
             else
               push =
-                "明後日の天気？\n気が早いねー！何かあるのかな?\n明後日は雨は降らない予定だよ(≧∇≦*)/\nまた当日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
+                "明後日の天気？\n気が早いねー！何かあるのかな?\n明後日は雨は降らない予定だよ!\n明後日の天気と気温はこんな感じだよ٩(ˊᗜˋ*)و \n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\nまた当日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
             end
           when /.*(かわいい|可愛い|カワイイ|きれい|綺麗|キレイ|素敵|ステキ|すてき|面白い|おもしろい|ありがと|すごい|スゴイ|スゴい|好き|頑張|がんば|ガンバ).*/
             push =
@@ -59,6 +71,12 @@ class LinebotController < ApplicationController
             push =
               "こんにちは！\n声をかけてくれてありがとう！\nこれからもよろしくね！(*´∇`)ﾉ"
           else
+            # 今日の天気・気温
+            weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
+            max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
+            min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
+
+            # 今日の降水確率
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
             per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
             per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]l'].text
@@ -68,7 +86,7 @@ class LinebotController < ApplicationController
                  "雨になんか負けてられないね！( ๑>ω•́ )ﻭ✧",
                  "雨だからちょっとぐらいお話しても良いよね？"].sample
               push =
-                "今日の天気？\n今日は雨が降りそうだから傘があった方が安心だよ！\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word}"
+                "今日の天気？\n今日は雨が降りそうだから傘があった方が安心だよ！\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word}"
             else
               word =
                 ["天気もいいし、一緒に出かけたいな！(｡>ｕ<｡)",
@@ -76,7 +94,7 @@ class LinebotController < ApplicationController
                  "今日はお天気日和だね！(*´▽`*)",
                  "雨が降っちゃったらごめんね(>_<)"].sample
               push =
-                "今日の天気？\n今日は雨は降らなさそうだよ！\n#{word}"
+                "今日の天気？\n今日は雨は降らなさそうだよ！\n　#{weather}\n　最高気温　#{max}℃\n　最低気温　#{min}℃\n#{word}"
             end
           end
 
