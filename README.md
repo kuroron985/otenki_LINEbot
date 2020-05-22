@@ -20,7 +20,7 @@
 ## デモ
 通知画面　　　　　　　　　　　　　　　　　　　　　　　　　降水確率内容
 
-<img src="https://user-images.githubusercontent.com/57647938/82107667-798c8f00-9764-11ea-8e1b-af5901587ec8.png" width="400" >　　　<img src="https://user-images.githubusercontent.com/57647938/82107813-5f06e580-9765-11ea-9dcd-c74bc150b3f9.png" width="400">
+<img src="https://user-images.githubusercontent.com/57647938/82107667-798c8f00-9764-11ea-8e1b-af5901587ec8.png" width="400" >　　　<img src="https://user-images.githubusercontent.com/57647938/82687139-e090d300-9c91-11ea-98df-8cb32961f14c.png" width="400">
 
 会話デモ
 <br>
