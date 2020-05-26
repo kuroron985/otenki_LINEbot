@@ -49,7 +49,7 @@ task :update_feed => :environment do
 
     # 発信するメッセージの設定
     push =
-      "#{word1}\n#{word3}\n今日の天気はこんな感じだよ!\n降水確率はこんな感じだよ!\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
+      "#{word1}\n#{word3}\n降水確率はこんな感じだよ!\n　  6〜12時　#{per06to12}％\n　12〜18時　#{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
 
     user_ids = User.all.pluck(:line_id)
     message = {
